@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  {% load static %}
+  <meta name="Graduate-Project" content="width=device-width, initial-scale=1">
+  <title>音是力導</title>
+  <link rel="icon" sizes="128x128" href="https://icons.iconarchive.com/icons/uiconstock/ios8-setting/128/music-icon.png">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css'>
+  <link rel="stylesheet" href="{% static 'css/record.css' %}">
+</head>
+<body>
+<body class="gradient">
+        
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-12 mb-4">
+        <div class="card">
+          <div class="card-block p-3">
+            <div class="embed-responsive embed-responsive-16by9">
+              <video id="inputVideo" muted>Video stream not available.</video>
+              <video id="outputVideo" hidden muted>Video stream not available.</video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <button id="startBtn" class="btn btn-sm btn-outline-info">開始錄製</button>
+      <button id="stopBtn" class="btn btn-sm btn-outline-danger" style="display:none">停止錄製</button>
+      <form action="/video/upload/" method="POST" enctype="multipart/form-data">
+        <div>
+          {% csrf_token %}
+          <input id="vfile" type="file" name="file" style="display:none" accept="video/*"/>
+          <button id="resetBtn" onclick="vfile.click()" class="btn btn-sm btn-outline-info" style="display:none">下一步</button>
+          <input type="submit" hidden value="提交"><br>
+        </div>
+      </form>
+    </div>
+    <div class="is-recording"></div>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js'></script>  
+  <script src="{% static 'js/record.js' %}"></script>
+</body>
+</body>
+
+</html>
+
+
+

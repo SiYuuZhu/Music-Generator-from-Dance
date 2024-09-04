@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <title>音是力導</title>
+  <meta name="Graduate-Project" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+  <link rel="icon" sizes="128x128" href="https://icons.iconarchive.com/icons/uiconstock/ios8-setting/128/music-icon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="{% static 'css/check.css' %}">
+</head>
+<body>
+<body data-spy="scroll" data-target="#scroll-spy">
+	
+	<nav class="navbar navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="collapse navbar-collapse" id="scroll-spy">
+				<ul class="nav navbar-nav ">
+					<li><a href="#home">確認上傳</a></li>
+					<li><a href="#about">關於我們</a></li>
+					<li><a href="#demo">Demo</a></li>
+					<li><a href="#features">系統特色</a></li>
+					<li><a href="#howto">使用方法</a></li>					
+				</ul>
+			</div>		
+		</div>
+	</nav>
+	
+	<section id="home">
+		<div class="container">
+			<div class="video-container">
+				<video controls playsinline id="player">
+					<!-- TODO: VIDEO src url  -->
+					<source src="{{dance.file.url}}" type="video/mp4">
+				</video>
+
+  				<div class="actions">
+					<div class="btns-container">
+						<div class="row btns">
+							<!-- TODO: Reimport button -->
+							<div class="col-xs-12">
+								<form action="/video/upload/" method="POST" enctype="multipart/form-data">
+									<div>
+										{% csrf_token %}
+										<input id="vfile" type="file" onchange="submit(this)" name="file" style="display:none" accept="video/*"/>
+										<a id="vbtn" class="btn" onclick="vfile.click()" role="button">重新匯入</a>
+										<input type="submit" hidden value="提交"><br>
+									</div>
+								</form>
+							</div>
+							<!-- TODO: Rerecord button -->
+							<div class="col-xs-12">
+								<a class="btn re-record" href="/record/" role="button">重新錄製</a>
+							</div>
+							<!-- TODO: Download button -->
+							<div class="col-xs-12">
+								<a class="btn download-video" href="/download/dance/{{dance.id}}/" onclick="downloadClick(event)" role="button">下載</a>
+							</div>
+							<!-- TODO: Generate button -->
+							<div class="col-xs-12">
+								<a class="btn to-home" href="/generate/{{dance.id}}/" role="button">生成</a>
+							</div>
+
+						</div>
+					</div>
+ 		 		</div>
+			</div>
+		</div>
+	</section>
+	
+	<section id="about">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-header">
+						關於我們
+					</div>
+				</div><!-- /.col -->
+			</div><!-- /.row -->	
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+					<p>音樂普遍存在於人類生活中，
+						<br>音樂與舞蹈相生相伴
+						<br>有舞蹈時，總需要音樂相襯；
+						<br>有音樂時，人們也會隨之起舞。
+						<br>因此，我們想以更自然的方式生成音樂，
+						<br>以肢體動作為輸入
+						<br>且不受限於樂理的知識
+						<br>讓身體律動製作屬於個人的音樂。</p>
+					<p>便誕生了 <highlight>音是力導</highlight></p>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</section><!-- /#about -->	
+	
+	<section id="demo">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-header">
+						Demo
+					</div>
+				</div><!-- /.col -->
+			</div><!-- /.row -->	
+			<div class="row">
+				<div class="video-roll--container col-xs-12">
+					<ul class="video-roll">
+						<li><a href="https://youtu.be/b" target="_blank"></a></li>
+						<li><a href="https://youtu.be/a" target="_blank"></a></li>
+						<li><a href="https://youtu.be/c" target="_blank"></a></li>
+					</ul>				
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+			<div class="row">
+				<div class="col-xs-12 text-center">		
+					<a class="btn" href="https://www.youtube.com/list" role="button">觀看Demo影片</a>	
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</section>	
+
+	<section id="features">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-header">
+						系統特色
+					</div>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+			
+			<div class="row">
+				<div class="feature-container col-xs-12">
+					<div class="row">
+						<div class="feature col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 text-center">
+							<svg class="lnr lnr-1"><use xlink:href="#lnr-music-note"></use></svg>
+							<h4>獨特性 Uniqueness</h4>
+							<p>不同的舞蹈皆能產生不同的音樂</p>
+						</div><!-- /.feature -->
+
+						<div class="feature col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 text-center">
+							<svg class="lnr lnr-2"><use xlink:href="#lnr-magic-wand"></use></svg>
+							<h4>直覺性 Intuition</h4>
+							<p>不用任何先備知識<br>僅要您任意地舞蹈</p>
+						</div><!-- /.feature -->
+
+						<div class="feature col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 text-center">
+							<svg class="lnr lnr-3"><use xlink:href="#lnr-rocket"></use></svg>
+							<h4>便捷性 Agility</h4>
+							<p>大幅縮短創作一首音樂的時間<br>且無時無刻都可以創作</p>
+						</div><!-- /.feature -->
+					</div><!-- /.row -->
+				</div><!-- /.feature-container -->
+
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+		
+	</section><!-- /#features -->
+	
+	<section id="howto">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-header">
+						使用方法
+					</div>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div>
+
+		<div class="container">
+			<p>
+			<div class="row example-split">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+					<ul class="timeline timeline-split">
+						<li class="timeline-item period">
+							<div class="timeline-info"></div>
+							<div class="timeline-marker"></div>
+							<div class="timeline-content">
+								<h3 class="timeline-title timeline-title-main">影片上傳</h3>
+							</div>
+						</li>
+						<li class="timeline-item">
+							<div class="timeline-info">
+								<span class="step">Step 1-1</span>
+							</div>
+							<div class="timeline-marker"></div>
+							<div class="timeline-content">
+								<h3 class="timeline-title">匯入影片</h3>
+								<p>您可以選擇從裝置中選擇欲生成音樂的影片 </p>
+							</div>
+						</li>
+						<li class="timeline-item">
+							<div class="timeline-info">
+								<span class="step">Step 1-2</span>
+							</div>
+							<div class="timeline-marker"></div>
+							<div class="timeline-content">
+								<h3 class="timeline-title">錄製影片</h3>
+								<p>剛好沒有影片? 點擊「錄製影片」開始錄一段影片吧！ </p>
+							</div>
+						</li>
+						<li class="timeline-item period">
+							<div class="timeline-info"></div>
+							<div class="timeline-marker"></div>
+							<div class="timeline-content">
+								<h3 class="timeline-title timeline-title-main">確認上傳</h3>
+							</div>
+						</li>
+						<li class="timeline-item">
+							<div class="timeline-info">
+								<span class="step">Step 2</span>
+							</div>
+							<div class="timeline-marker"></div>
+							<div class="timeline-content">
+								<h3 class="timeline-title">音樂生成</h3>
+								<p>音是力導會將您所上傳的音樂進行音樂生成！</p>
+							</div>
+						</li>
+						<li class="timeline-item period">
+							<div class="timeline-info"></div>
+							<div class="timeline-marker"></div>
+							<div class="timeline-content">
+								<h3 class="timeline-title timeline-title-main">生成完成</h3>
+							</div>
+						</li>
+						<li class="timeline-item">
+							<div class="timeline-info">
+								<span class="step">Step 3</span>
+							</div>
+							<div class="timeline-marker"></div>
+							<div class="timeline-content">
+								<h3 class="timeline-title">生成結果顯示</h3>
+								<p>恭喜您！音樂已經生成完畢，<br> 您可以在螢幕上瀏覽生成結果，<br> 亦可以將影片&音樂獨立下載至您的裝置！ </p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		
+	</section>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<h4>
+						Copyright &copy; 2021 音是力導
+					</h4>
+				</div>
+			</div>
+		</div>	
+	</footer>
+	<a href="#home" role="button" class="scrollTop">
+		<svg class="lnr lnr-chevron-up"><use xlink:href="#lnr-chevron-up"></use></svg>
+	</a>
+</body>
+<!-- partial -->
+	<script src="{% static 'js/check.js' %}"></script>
+
+</body>
+</html>
