@@ -32,8 +32,8 @@ set up a virtual environment to manage dependencies:
 
 
 ## Demo
-### [Demo: Generated Music with origin dance video](https://www.youtube.com/watch?v=kNr6kWlKy0k)
+### [Demo#1 Generated Music with origin dance video](https://www.youtube.com/watch?v=kNr6kWlKy0k)
 https://github.com/user-attachments/assets/b763dd4b-c925-4173-9d53-5f587dfe5835
 
-### Demo: Web
+### Demo#2 Web
 ![music-generator-from-dance](https://github.com/user-attachments/assets/d80b8985-255b-41c1-b97e-70531bf10168)
